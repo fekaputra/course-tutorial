@@ -1,0 +1,13 @@
+PREFIX : <http://semantics.id/ns/example/movie#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+CONSTRUCT {
+  ?movie rdf:type :Movie ;
+    rdfs:label ?movie_title ;
+    rdfs:comment "Constructed Knowledge" .
+}
+WHERE {
+  ?movie rdf:type :Movie ;
+  rdfs:label ?movie_title .
+}
