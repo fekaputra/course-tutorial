@@ -1,6 +1,6 @@
-package id.semantics.implementation;
+package org.semsys.implementation;
 
-import id.semantics.helper.Tutorial;
+import org.semsys.helper.Tutorial;
 import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.Statement;
@@ -13,6 +13,7 @@ import org.eclipse.rdf4j.repository.RepositoryResult;
 import org.eclipse.rdf4j.repository.http.HTTPRepository;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.Rio;
+import org.semsys.helper.Utility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,8 +21,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.Charset;
-
-import static id.semantics.helper.Utility.*;
 
 public class HelloRDF4J implements Tutorial {
 
@@ -37,14 +36,14 @@ public class HelloRDF4J implements Tutorial {
         //        repo = new SailRepository(new MemoryStore());
         //        repo = new SailRepository(new MemoryStore(new File("storage/store.ttl")));
         //        repo = new SailRepository(new NativeStore(new File("storage/store")));
-        repo = new HTTPRepository(REMOTE_SPARQL_ENDPOINT, REMOTE_REPO_ID);
+        repo = new HTTPRepository(Utility.REMOTE_SPARQL_ENDPOINT, Utility.REMOTE_REPO_ID);
         repo.init();
     }
 
     @Override public void createInstances() {
 
         ValueFactory valueFactory = repo.getValueFactory();
-        IRI john = valueFactory.createIRI(NS_EXAMPLE, "john");
+        IRI john = valueFactory.createIRI(Utility.NS_EXAMPLE, "john");
 
         try (RepositoryConnection conn = repo.getConnection()) {
             conn.add(john, RDF.TYPE, FOAF.PERSON);
@@ -55,7 +54,7 @@ public class HelloRDF4J implements Tutorial {
     @Override public void modifyInstances() {
 
         ValueFactory valueFactory = repo.getValueFactory();
-        IRI john = valueFactory.createIRI(NS_EXAMPLE, "john");
+        IRI john = valueFactory.createIRI(Utility.NS_EXAMPLE, "john");
 
         try (RepositoryConnection conn = repo.getConnection()) {
             conn.remove(john, RDFS.LABEL, null);
@@ -82,7 +81,7 @@ public class HelloRDF4J implements Tutorial {
     @Override public void selectQuery(String queryFile) {
 
         try (RepositoryConnection conn = repo.getConnection()) {
-            String queryString = readFile(queryFile, Charset.forName("UTF-8"));
+            String queryString = Utility.readFile(queryFile, Charset.forName("UTF-8"));
             TupleQuery query = conn.prepareTupleQuery(queryString);
             TupleQueryResult queryResult = query.evaluate();
 
@@ -99,7 +98,7 @@ public class HelloRDF4J implements Tutorial {
     @Override public void constructQuery(String queryFile) {
 
         try (RepositoryConnection conn = repo.getConnection()) {
-            String queryString = readFile(queryFile, Charset.forName("UTF-8"));
+            String queryString = Utility.readFile(queryFile, Charset.forName("UTF-8"));
             GraphQuery query = conn.prepareGraphQuery(queryString);
             GraphQueryResult queryResult = query.evaluate();
 
@@ -114,7 +113,7 @@ public class HelloRDF4J implements Tutorial {
 
     @Override public void loadRdfFile(String inputFile) throws IOException {
         FileReader reader = new FileReader(inputFile);
-        Model model = Rio.parse(reader, NS_EXAMPLE, RDFFormat.TURTLE);
+        Model model = Rio.parse(reader, Utility.NS_EXAMPLE, RDFFormat.TURTLE);
         try (RepositoryConnection conn = repo.getConnection()) {
             conn.add(model);
         }
@@ -132,8 +131,8 @@ public class HelloRDF4J implements Tutorial {
             model.setNamespace("rdfs", RDFS.NAMESPACE);
             model.setNamespace("owl", OWL.NAMESPACE);
             model.setNamespace("foaf", FOAF.NAMESPACE);
-            model.setNamespace("ex", NS_EXAMPLE);
-            model.setNamespace("mv", NS_MOVIE);
+            model.setNamespace("ex", Utility.NS_EXAMPLE);
+            model.setNamespace("mv", Utility.NS_MOVIE);
             model.setNamespace("xsd", XMLSchema.NAMESPACE);
 
             Rio.write(model, fileWriter, RDFFormat.TURTLE);

@@ -1,7 +1,7 @@
-package id.semantics.implementation;
+package org.semsys.implementation;
 
-import id.semantics.helper.Tutorial;
-import id.semantics.helper.Utility;
+import org.semsys.helper.Tutorial;
+import org.semsys.helper.Utility;
 import org.apache.jena.ontology.Individual;
 import org.apache.jena.ontology.OntModel;
 import org.apache.jena.ontology.OntModelSpec;
@@ -22,7 +22,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
 
-import static id.semantics.helper.Utility.readFile;
+import static org.semsys.helper.Utility.readFile;
 
 public class HelloJena implements Tutorial {
 

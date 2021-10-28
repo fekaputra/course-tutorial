@@ -1,4 +1,4 @@
-package id.semantics.helper;
+package org.semsys.helper;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
