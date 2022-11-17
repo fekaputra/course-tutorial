@@ -1,0 +1,12 @@
+PREFIX : <http://semantics.id/ns/example/film#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?film_studio_name ?established_date
+WHERE {
+  ?film_studio a :FilmStudio ;
+  rdfs:label ?film_studio_name ;
+  :establishedDate ?established_date .
+}
+ORDER BY ?established_date
+LIMIT 1

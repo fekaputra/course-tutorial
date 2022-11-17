@@ -6,11 +6,9 @@
 
     <groupId>id.semantics</groupId>
     <artifactId>course-tutorial</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>0.0.3-SNAPSHOT</version>
 
     <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -18,13 +16,13 @@
         <dependency>
             <groupId>org.eclipse.rdf4j</groupId>
             <artifactId>rdf4j-runtime</artifactId>
-            <version>3.7.3</version>
+            <version>4.2.1</version>
             <type>pom</type>
         </dependency>
         <dependency>
             <groupId>org.apache.jena</groupId>
             <artifactId>apache-jena-libs</artifactId>
-            <version>4.2.0</version>
+            <version>4.6.1</version>
             <type>pom</type>
         </dependency>
         <dependency>
@@ -42,6 +40,13 @@
                 <version>3.0.0</version>
                 <configuration>
                     <mainClass>org.semsys.Main</mainClass>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>11</source>
+                    <target>11</target>
                 </configuration>
             </plugin>
         </plugins>

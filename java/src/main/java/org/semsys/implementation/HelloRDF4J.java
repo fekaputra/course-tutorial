@@ -1,6 +1,5 @@
 package org.semsys.implementation;
 
-import org.semsys.helper.Tutorial;
 import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.Statement;
@@ -10,13 +9,16 @@ import org.eclipse.rdf4j.query.*;
 import org.eclipse.rdf4j.repository.Repository;
 import org.eclipse.rdf4j.repository.RepositoryConnection;
 import org.eclipse.rdf4j.repository.RepositoryResult;
-import org.eclipse.rdf4j.repository.http.HTTPRepository;
+import org.eclipse.rdf4j.repository.sail.SailRepository;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.Rio;
+import org.eclipse.rdf4j.sail.nativerdf.NativeStore;
+import org.semsys.helper.Tutorial;
 import org.semsys.helper.Utility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -32,15 +34,17 @@ public class HelloRDF4J implements Tutorial {
         createRepository();
     }
 
-    @Override public void createRepository() {
+    @Override
+    public void createRepository() {
         //        repo = new SailRepository(new MemoryStore());
         //        repo = new SailRepository(new MemoryStore(new File("storage/store.ttl")));
-        //        repo = new SailRepository(new NativeStore(new File("storage/store")));
-        repo = new HTTPRepository(Utility.REMOTE_SPARQL_ENDPOINT, Utility.REMOTE_REPO_ID);
+        //        repo = new HTTPRepository(Utility.REMOTE_SPARQL_ENDPOINT, Utility.REMOTE_REPO_ID);
+        repo = new SailRepository(new NativeStore(new File("storage/store")));
         repo.init();
     }
 
-    @Override public void createInstances() {
+    @Override
+    public void createInstances() {
 
         ValueFactory valueFactory = repo.getValueFactory();
         IRI john = valueFactory.createIRI(Utility.NS_EXAMPLE, "john");
@@ -51,7 +55,8 @@ public class HelloRDF4J implements Tutorial {
         }
     }
 
-    @Override public void modifyInstances() {
+    @Override
+    public void modifyInstances() {
 
         ValueFactory valueFactory = repo.getValueFactory();
         IRI john = valueFactory.createIRI(Utility.NS_EXAMPLE, "john");
@@ -63,7 +68,8 @@ public class HelloRDF4J implements Tutorial {
 
     }
 
-    @Override public void iteratingRdfData() {
+    @Override
+    public void iteratingRdfData() {
 
         try (RepositoryConnection conn = repo.getConnection()) {
             RepositoryResult<Statement> statements = conn.getStatements(null, null, null);
@@ -75,10 +81,12 @@ public class HelloRDF4J implements Tutorial {
                     System.out.println("    " + statement.getObject());
                 }
             }
+            statements.close();
         }
     }
 
-    @Override public void selectQuery(String queryFile) {
+    @Override
+    public void selectQuery(String queryFile) {
 
         try (RepositoryConnection conn = repo.getConnection()) {
             String queryString = Utility.readFile(queryFile, Charset.forName("UTF-8"));
@@ -95,7 +103,8 @@ public class HelloRDF4J implements Tutorial {
         }
     }
 
-    @Override public void constructQuery(String queryFile) {
+    @Override
+    public void constructQuery(String queryFile) {
 
         try (RepositoryConnection conn = repo.getConnection()) {
             String queryString = Utility.readFile(queryFile, Charset.forName("UTF-8"));
@@ -111,7 +120,8 @@ public class HelloRDF4J implements Tutorial {
 
     }
 
-    @Override public void loadRdfFile(String inputFile) throws IOException {
+    @Override
+    public void loadRdfFile(String inputFile) throws IOException {
         FileReader reader = new FileReader(inputFile);
         Model model = Rio.parse(reader, Utility.NS_EXAMPLE, RDFFormat.TURTLE);
         try (RepositoryConnection conn = repo.getConnection()) {
@@ -120,7 +130,8 @@ public class HelloRDF4J implements Tutorial {
 
     }
 
-    @Override public void writeRdfFile(String outputFile) throws IOException {
+    @Override
+    public void writeRdfFile(String outputFile) throws IOException {
         FileWriter fileWriter = new FileWriter(outputFile);
         try (RepositoryConnection conn = repo.getConnection()) {
 
