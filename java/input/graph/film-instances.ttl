@@ -1,0 +1,272 @@
+@prefix : <http://semantics.id/ns/example/film#> .
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix ex: <http://semantics.id/ns/example#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://semantics.id/ns/example/film> .
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://semantics.id/ns/example#EntertainmentOne
+ex:EntertainmentOne rdf:type owl:NamedIndividual ,
+                             :FilmStudio ;
+                    :establishedDate "1973-01-01"^^xsd:date ;
+                    rdfs:label "Entertainment One" .
+
+
+###  http://semantics.id/ns/example#MandevilleFilms
+ex:MandevilleFilms rdf:type owl:NamedIndividual ,
+                            :FilmStudio ;
+                   :establishedDate "1955-01-01"^^xsd:date ;
+                   rdfs:label "Mandeville Films" .
+
+
+###  http://semantics.id/ns/example#WaltDisneyPictures
+ex:WaltDisneyPictures rdf:type owl:NamedIndividual ,
+                               :FilmStudio ;
+                      :establishedDate "1985-06-21"^^xsd:date ;
+                      rdfs:label "Walt Disney Pictures" .
+
+
+###  http://semantics.id/ns/example#alicia_vikander
+ex:alicia_vikander rdf:type owl:NamedIndividual ,
+                            :Actor ;
+                   :fullName "Alicia Vikander" ;
+                   :gender "female" .
+
+
+###  http://semantics.id/ns/example#bill_condon
+ex:bill_condon rdf:type owl:NamedIndividual ,
+                        :Director ;
+               :fullName "Bill Condon" ;
+               :gender "male" .
+
+
+###  http://semantics.id/ns/example#dan_stevens
+ex:dan_stevens rdf:type owl:NamedIndividual ,
+                        :Actor ;
+               :dateOfBirth "1982-10-10"^^xsd:date ;
+               :fullName "Dan Stevens" ;
+               :gender "male" .
+
+
+###  http://semantics.id/ns/example#emma_watson
+ex:emma_watson rdf:type owl:NamedIndividual ,
+                        :Actor ;
+               :dateOfBirth "1990-04-15"^^xsd:date ;
+               :fullName "Emma Watson" ;
+               :gender "female" .
+
+
+###  http://semantics.id/ns/example#ewan_mcgregor
+ex:ewan_mcgregor rdf:type owl:NamedIndividual ,
+                          :Actor ;
+                 :dateOfBirth "1971-03-31"^^xsd:date ;
+                 :fullName "Ewan McGregor" ;
+                 :gender "male" .
+
+
+###  http://semantics.id/ns/example#film_1
+ex:film_1 rdf:type owl:NamedIndividual ,
+                   :Film ;
+          :hasActor ex:ewan_mcgregor ,
+                    ex:hayley_atwell ;
+          :hasDirector ex:marc_forster ;
+          :hasFilmStudio ex:WaltDisneyPictures ;
+          :hasGenre :genre_animation ,
+                    :genre_family ;
+          :hasScriptWriter ex:writer_1 ,
+                           ex:writer_2 ;
+          :releaseYear 2018 ;
+          rdfs:label "Christopher Robin" .
+
+
+###  http://semantics.id/ns/example#film_2
+ex:film_2 rdf:type owl:NamedIndividual ,
+                   :Film ;
+          :hasActor ex:alicia_vikander ,
+                    ex:ewan_mcgregor ;
+          :hasDirector ex:julius_avery ;
+          :hasFilmStudio ex:EntertainmentOne ;
+          :hasGenre :genre_action ,
+                    :genre_drama ;
+          :hasScriptWriter ex:julius_avery ,
+                           ex:writer_3 ;
+          :releaseYear 2014 ;
+          rdfs:label "Son of a Gun" .
+
+
+###  http://semantics.id/ns/example#film_3
+ex:film_3 rdf:type owl:NamedIndividual ,
+                   :Film ;
+          :hasActor ex:dan_stevens ,
+                    ex:emma_watson ,
+                    ex:ewan_mcgregor ;
+          :hasDirector ex:bill_condon ;
+          :hasFilmStudio ex:WaltDisneyPictures ;
+          :hasGenre :genre_family ,
+                    :genre_romance ;
+          :hasScriptWriter ex:writer_4 ,
+                           ex:writer_5 ;
+          :hasSoundtrack :Belle ;
+          :releaseYear 2017 ;
+          rdfs:label "Beauty and the Beast" .
+
+
+###  http://semantics.id/ns/example#film_4
+ex:film_4 rdf:type owl:NamedIndividual ,
+                   :Film ;
+          :hasActor :zendaya ;
+          :hasComposer :hans_zimmer ;
+          :hasGenre :genre_science_fiction ;
+          :releaseYear 2021 ;
+          rdfs:label "Dune" .
+
+
+###  http://semantics.id/ns/example#film_5
+ex:film_5 rdf:type owl:NamedIndividual ,
+                   :Film ;
+          :hasActor :kyle_maclachlan ;
+          :hasGenre :genre_science_fiction ;
+          :releaseYear 1984 ;
+          rdfs:label "Dune" .
+
+
+###  http://semantics.id/ns/example#hayley_atwell
+ex:hayley_atwell rdf:type owl:NamedIndividual ,
+                          :Actor ;
+                 :dateOfBirth "1982-04-05"^^xsd:date ;
+                 :fullName "Hayley Atwell" ;
+                 :gender "female" .
+
+
+###  http://semantics.id/ns/example#julius_avery
+ex:julius_avery rdf:type owl:NamedIndividual ,
+                         :Director ,
+                         :ScriptWriter ;
+                :fullName "Julius Avery" ;
+                :gender "male" .
+
+
+###  http://semantics.id/ns/example#marc_forster
+ex:marc_forster rdf:type owl:NamedIndividual ,
+                         :Director ;
+                :fullName "Marc Forster" ;
+                :gender "male" .
+
+
+###  http://semantics.id/ns/example#writer_1
+ex:writer_1 rdf:type owl:NamedIndividual ,
+                     :ScriptWriter ;
+            :dateOfBirth "1966-06-07"^^xsd:date ;
+            :fullName "Tom McCarthy" ;
+            :gender "male" .
+
+
+###  http://semantics.id/ns/example#writer_2
+ex:writer_2 rdf:type owl:NamedIndividual ,
+                     :ScriptWriter ;
+            :fullName "Alex Ross" .
+
+
+###  http://semantics.id/ns/example#writer_3
+ex:writer_3 rdf:type owl:NamedIndividual ,
+                     :ScriptWriter ;
+            :fullName "John Collee" ;
+            :gender "male" .
+
+
+###  http://semantics.id/ns/example#writer_4
+ex:writer_4 rdf:type owl:NamedIndividual ,
+                     :ScriptWriter ;
+            :fullName "Stephen Chbosky" ;
+            :gender "male" .
+
+
+###  http://semantics.id/ns/example#writer_5
+ex:writer_5 rdf:type owl:NamedIndividual ,
+                     :ScriptWriter ;
+            :fullName "Evan Spiliotopoulos" .
+
+
+###  http://semantics.id/ns/example/film#Belle
+:Belle rdf:type owl:NamedIndividual ,
+                :Soundtrack ;
+       :hasPerformer :alan_menken ;
+       rdfs:label "Belle (Soundtrack Version)" ;
+       rdfs:seeAlso "https://www.youtube.com/watch?v=piYIZaoBJMQ" .
+
+
+###  http://semantics.id/ns/example/film#alan_menken
+:alan_menken rdf:type owl:NamedIndividual ,
+                      :Composer ,
+                      :Performer ;
+             :fullName "Alan Menken" ;
+             :gender "male" .
+
+
+###  http://semantics.id/ns/example/film#genre_action
+:genre_action rdf:type owl:NamedIndividual ,
+                       :Genre ;
+              rdfs:label "Action" .
+
+
+###  http://semantics.id/ns/example/film#genre_animation
+:genre_animation rdf:type owl:NamedIndividual ,
+                          :Genre ;
+                 rdfs:label "Animation" .
+
+
+###  http://semantics.id/ns/example/film#genre_drama
+:genre_drama rdf:type owl:NamedIndividual ,
+                      :Genre ;
+             rdfs:label "Drama" .
+
+
+###  http://semantics.id/ns/example/film#genre_family
+:genre_family rdf:type owl:NamedIndividual ,
+                       :Genre ;
+              rdfs:label "Family" .
+
+
+###  http://semantics.id/ns/example/film#genre_romance
+:genre_romance rdf:type owl:NamedIndividual ,
+                        :Genre ;
+               rdfs:label "Romance" .
+
+
+###  http://semantics.id/ns/example/film#genre_science_fiction
+:genre_science_fiction rdf:type owl:NamedIndividual ,
+                                :Genre ;
+                       rdfs:label "Science Fiction"@en .
+
+
+###  http://semantics.id/ns/example/film#hans_zimmer
+:hans_zimmer rdf:type owl:NamedIndividual ,
+                      :Composer ;
+             :fullName "Hans Zimmer" .
+
+
+###  http://semantics.id/ns/example/film#kyle_maclachlan
+:kyle_maclachlan rdf:type owl:NamedIndividual ,
+                          :Actor ;
+                 :dateOfBirth "1959-02-22"^^xsd:date ;
+                 :fullName "Kyle Merritt MacLachlan" ;
+                 :gender "male" .
+
+
+###  http://semantics.id/ns/example/film#zendaya
+:zendaya rdf:type owl:NamedIndividual ,
+                  :Actor ;
+         :dateOfBirth "1996-09-01"^^xsd:date ;
+         :fullName "Zendaya Maree Stoermer Coleman" ;
+         :gender "female" .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi

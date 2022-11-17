@@ -10,11 +10,12 @@ import java.io.IOException;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-
+        System.out.println("____ JENA ____");
         Tutorial tutorialJena = new HelloJena();
-        Tutorial tutorialRDF4J = new HelloRDF4J();
-
         runTutorial(tutorialJena);
+
+        System.out.println("____ RDF4J ____");
+        Tutorial tutorialRDF4J = new HelloRDF4J();
         runTutorial(tutorialRDF4J);
     }
 

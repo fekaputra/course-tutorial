@@ -1,0 +1,284 @@
+@prefix : <http://semantics.id/ns/example/film#> .
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix ex: <http://semantics.id/ns/example#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://semantics.id/ns/example/film> .
+
+<http://semantics.id/ns/example/film> rdf:type owl:Ontology ;
+                                       owl:versionIRI <http://semantics.id/ns/example/film/1.0.0> ;
+                                       dc:contributor "Filip Kovacevic" ,
+                                                      "Laura Waltersdorfer" ,
+                                                      "Marta Sabou" ;
+                                       dc:created "2022-09-30" ;
+                                       dc:creator "Fajar J. Ekaputra" ;
+                                       dc:description "An ontology about film and related concepts developed for ISS course at TU Wien." ;
+                                       dc:title "The Film Ontology" .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/terms/contributor
+dc:contributor rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/created
+dc:created rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/creator
+dc:creator rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/description
+dc:description rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/title
+dc:title rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2002/07/owl#minCardinality
+owl:minCardinality rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Datatypes
+#################################################################
+
+###  http://www.w3.org/2001/XMLSchema#date
+xsd:date rdf:type rdfs:Datatype .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://semantics.id/ns/example/film#friendOf
+:friendOf rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf foaf:knows ;
+          rdf:type owl:SymmetricProperty ;
+          rdfs:domain foaf:Person ;
+          rdfs:range foaf:Person ;
+          rdfs:label "friendOf" .
+
+
+###  http://semantics.id/ns/example/film#hasActor
+:hasActor rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf :hasPerformer ;
+          rdfs:domain :Film ;
+          rdfs:range :Actor ;
+          rdfs:label "hasActor" ;
+          owl:minCardinality 1 .
+
+
+###  http://semantics.id/ns/example/film#hasComposer
+:hasComposer rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf :hasCrew ;
+             rdfs:domain :Film ;
+             rdfs:range :Composer ;
+             rdfs:label "hasComposer" .
+
+
+###  http://semantics.id/ns/example/film#hasCrew
+:hasCrew rdf:type owl:ObjectProperty ;
+         rdfs:domain :Film ;
+         rdfs:range foaf:Person ;
+         rdfs:label "hasCrew" .
+
+
+###  http://semantics.id/ns/example/film#hasDirector
+:hasDirector rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf :hasCrew ;
+             rdfs:domain :Film ;
+             rdfs:range :Director ;
+             rdfs:label "hasDirector" ;
+             owl:minCardinality 1 .
+
+
+###  http://semantics.id/ns/example/film#hasFilmStudio
+:hasFilmStudio rdf:type owl:ObjectProperty ;
+               rdfs:domain :Film ;
+               rdfs:range :FilmStudio ;
+               rdfs:label "hasFilmStudio" ;
+               owl:minCardinality 1 .
+
+
+###  http://semantics.id/ns/example/film#hasGenre
+:hasGenre rdf:type owl:ObjectProperty ;
+          rdfs:domain :Film ;
+          rdfs:range :Genre ;
+          rdfs:label "hasGenre" ;
+          owl:minCardinality 1 .
+
+
+###  http://semantics.id/ns/example/film#hasPerformer
+:hasPerformer rdf:type owl:ObjectProperty ;
+              rdfs:domain :Artwork ;
+              rdfs:range :Performer ;
+              rdfs:label "hasPerformer" .
+
+
+###  http://semantics.id/ns/example/film#hasScriptWriter
+:hasScriptWriter rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf :hasCrew ;
+                 rdfs:domain :Film ;
+                 rdfs:range :ScriptWriter ;
+                 rdfs:label "hasScriptWriter" ;
+                 owl:minCardinality 1 .
+
+
+###  http://semantics.id/ns/example/film#hasSoundtrack
+:hasSoundtrack rdf:type owl:ObjectProperty ;
+               rdfs:domain :Film ;
+               rdfs:range :Soundtrack ;
+               rdfs:label "hasSoundtrack" .
+
+
+###  http://semantics.id/ns/example/film#prequel
+:prequel rdf:type owl:ObjectProperty ;
+         owl:inverseOf :sequel ;
+         rdf:type owl:TransitiveProperty ;
+         rdfs:domain :Film ;
+         rdfs:range :Film ;
+         rdfs:label "prequel" .
+
+
+###  http://semantics.id/ns/example/film#sequel
+:sequel rdf:type owl:ObjectProperty ,
+                 owl:TransitiveProperty ;
+        rdfs:domain :Film ;
+        rdfs:range :Film ;
+        rdfs:label "sequel" .
+
+
+###  http://xmlns.com/foaf/0.1/knows
+foaf:knows rdf:type owl:ObjectProperty ;
+           rdfs:domain foaf:Person ;
+           rdfs:range foaf:Person .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://semantics.id/ns/example/film#budget
+:budget rdf:type owl:DatatypeProperty ;
+        rdfs:domain :Film ;
+        rdfs:range xsd:float ;
+        rdfs:label "budget" .
+
+
+###  http://semantics.id/ns/example/film#dateOfBirth
+:dateOfBirth rdf:type owl:DatatypeProperty ,
+                      owl:FunctionalProperty ;
+             rdfs:domain foaf:Person ;
+             rdfs:range xsd:date ;
+             rdfs:label "dateOfBirth" .
+
+
+###  http://semantics.id/ns/example/film#duration
+:duration rdf:type owl:DatatypeProperty ;
+          rdfs:domain :Artwork ;
+          rdfs:range xsd:float ;
+          rdfs:label "duration" .
+
+
+###  http://semantics.id/ns/example/film#establishedDate
+:establishedDate rdf:type owl:DatatypeProperty ,
+                          owl:FunctionalProperty ;
+                 rdfs:domain :FilmStudio ;
+                 rdfs:range xsd:date ;
+                 rdfs:label "establishedDate" .
+
+
+###  http://semantics.id/ns/example/film#fullName
+:fullName rdf:type owl:DatatypeProperty ;
+          rdfs:domain foaf:Person ;
+          rdfs:range xsd:string ;
+          rdfs:label "fullName" .
+
+
+###  http://semantics.id/ns/example/film#gender
+:gender rdf:type owl:DatatypeProperty ,
+                 owl:FunctionalProperty ;
+        rdfs:domain foaf:Person ;
+        rdfs:range xsd:string ;
+        rdfs:label "gender" .
+
+
+###  http://semantics.id/ns/example/film#releaseYear
+:releaseYear rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Film ;
+             rdfs:range xsd:integer ;
+             rdfs:label "releaseYear" .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://semantics.id/ns/example/film#Actor
+:Actor rdf:type owl:Class ;
+       rdfs:subClassOf :Performer ,
+                       foaf:Person ;
+       rdfs:label "Actor" .
+
+
+###  http://semantics.id/ns/example/film#Artwork
+:Artwork rdf:type owl:Class ;
+         rdfs:label "Artwork" .
+
+
+###  http://semantics.id/ns/example/film#Composer
+:Composer rdf:type owl:Class ;
+          rdfs:subClassOf foaf:Person ;
+          rdfs:label "Composer" .
+
+
+###  http://semantics.id/ns/example/film#Director
+:Director rdf:type owl:Class ;
+          rdfs:subClassOf foaf:Person ;
+          rdfs:label "Director" .
+
+
+###  http://semantics.id/ns/example/film#Film
+:Film rdf:type owl:Class ;
+      rdfs:subClassOf :Artwork ;
+      rdfs:label "Film" .
+
+
+###  http://semantics.id/ns/example/film#FilmStudio
+:FilmStudio rdf:type owl:Class ;
+            rdfs:label "FilmStudio" .
+
+
+###  http://semantics.id/ns/example/film#Genre
+:Genre rdf:type owl:Class ;
+       rdfs:label "Genre" .
+
+
+###  http://semantics.id/ns/example/film#Performer
+:Performer rdf:type owl:Class ;
+           rdfs:label "Performer" .
+
+
+###  http://semantics.id/ns/example/film#ScriptWriter
+:ScriptWriter rdf:type owl:Class ;
+              rdfs:subClassOf foaf:Person ;
+              rdfs:label "ScriptWriter" .
+
+
+###  http://semantics.id/ns/example/film#Soundtrack
+:Soundtrack rdf:type owl:Class ;
+            rdfs:subClassOf :Artwork ;
+            rdfs:label "Soundtrack" .
+
+
+###  http://xmlns.com/foaf/0.1/Person
+foaf:Person rdf:type owl:Class .

@@ -143,7 +143,7 @@ public class HelloRDF4J implements Tutorial {
             model.setNamespace("owl", OWL.NAMESPACE);
             model.setNamespace("foaf", FOAF.NAMESPACE);
             model.setNamespace("ex", Utility.NS_EXAMPLE);
-            model.setNamespace("mv", Utility.NS_MOVIE);
+            model.setNamespace("mv", Utility.NS_FILM);
             model.setNamespace("xsd", XMLSchema.NAMESPACE);
 
             Rio.write(model, fileWriter, RDFFormat.TURTLE);
